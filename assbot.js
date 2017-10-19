@@ -1,4 +1,8 @@
 /*jshint esversion: 6 */
+//..TOC..//
+// 1)
+// 2)
+
 //..IMPORTS..//
 //Config file import
 var cfg = require("./config");
