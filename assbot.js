@@ -1,4 +1,13 @@
 /*jshint esversion: 6 */
+//...TOC...//
+//..IMPORTS..//
+//..ATTACHING OBJECTS..//
+//..EXEC FUNCTIONS..//
+//Login to the registered Discord server
+//Message on successfull launch
+//Basic messages delete command
+//..SAMPLE TEXT..//
+// -------
 
 //..IMPORTS..//
 //Config file import
@@ -11,6 +20,10 @@ var fs = require("fs");
 //..ATTACHING OBJECTS..//
 //client from Discord
 var client = new Discord.Client();
+//Attaching variable for in-chat command
+var command = args.shift().toLowerCase();
+//Attaching arguments for the command
+var args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 
 //..EXEC FUNCTIONS..//
 //Login to the registered Discord server
@@ -19,19 +32,21 @@ client.login(cfg.token);
 client.on("ready", () => {
   console.log("I am ready!");
 });
+//Exiting if another bot messaged
+client.on("message", message => {
+  if(message.author.bot) return;
+});
+//Exiting if prefix incorrect
+client.on("message", message => {
+  if(message.content.indexOf(config.prefix) !== 0) return;
+});
 //Basic messages delete command
 client.on("message", (message) => {
-  if (message.content.startsWith(cfg.cmd + "purge"))
+  if (message.content.startsWith(cfg.prefix + "purge"))
     message.channel.bulkDelete(20);
 });
 
 //..SAMPLE TEXT..//
-// const Discord = require("discord.js");
-// const client = new Discord.Client();
-// const fs = require("fs");
-
-// const config = require("./config.json");
-
 // // This loop reads the /events/ folder and attaches each event file to the appropriate event.
 // fs.readdir("./events/", (err, files) => {
 //   if (err) return console.error(err);
@@ -110,8 +125,7 @@ client.on("message", (message) => {
 //   // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
 //   // command = say
 //   // args = ["Is", "this", "the", "real", "life?"]
-//   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-//   const command = args.shift().toLowerCase();
+
   
 //   // Let's go with a few common example commands! Feel free to delete or change those.
   

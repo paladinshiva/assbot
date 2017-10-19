@@ -3,5 +3,5 @@
 //Bot's Secret Client ID needed for login into Discord server
     "token": "MzY5OTYyODAxNjA0NTkxNjE2.DMgr0Q.Un1_77ZSJP6PCBik6NtOdbef_uA",
 //Prefix definition  
-    "cmd": "."
+    "prefix": "."
   }
