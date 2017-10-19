@@ -4,7 +4,8 @@
   "description": "ASSignment bot for Discord",
   "main": "assbot.js",
   "dependencies": {
-    "discord.js": "^11.2.1"
+    "discord.js": "^11.2.1",
+    "jshint": "^2.9.5"
   },
   "devDependencies": {},
   "scripts": {
