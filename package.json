@@ -4,8 +4,7 @@
   "description": "ASSignment bot for Discord",
   "main": "assbot.js",
   "dependencies": {
-    "discord.js": "^11.2.1",
-    "jshint": "^2.9.5"
+    "discord.js": "^11.2.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -23,7 +22,7 @@
     "reactions"
   ],
   "author": "paladinshiva",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/paladinshiva/assbot/issues"
   },

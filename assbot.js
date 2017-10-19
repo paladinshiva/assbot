@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+
 //..IMPORTS..//
 //Config file import
 var cfg = require("./config");
@@ -23,6 +24,7 @@ client.on("message", (message) => {
   if (message.content.startsWith(cfg.cmd + "purge"))
     message.channel.bulkDelete(20);
 });
+
 //..SAMPLE TEXT..//
 // const Discord = require("discord.js");
 // const client = new Discord.Client();
