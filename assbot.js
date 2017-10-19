@@ -1,14 +1,29 @@
-// var Discord = require("discord.js");
-// const client = new Discord.Client();
-var client = require("./dist/helpers/client");
-var prefix = require("./dist/functions/prefix");
+/*jshint esversion: 6 */
+//..IMPORTS..//
+//Config file import
 var cfg = require("./config");
-var purge = require("./dist/commands/purge");
+//Discord.js import
+var Discord = require("discord.js");
+//fs import
+var fs = require("fs");
+
+//..ATTACHING OBJECTS..//
+//client from Discord
+var client = new Discord.Client();
+
+//..EXEC FUNCTIONS..//
+//Login to the registered Discord server
+client.login(cfg.token);
+//Message on successfull launch
 client.on("ready", () => {
   console.log("I am ready!");
 });
-
-client.login(cfg.token);
+//Basic messages delete command
+client.on("message", (message) => {
+  if (message.content.startsWith(cfg.cmd + "purge"))
+    message.channel.bulkDelete(20);
+});
+//..SAMPLE TEXT..//
 // const Discord = require("discord.js");
 // const client = new Discord.Client();
 // const fs = require("fs");

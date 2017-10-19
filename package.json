@@ -1,0 +1,31 @@
+{
+  "name": "assbot",
+  "version": "1.0.1",
+  "description": "ASSignment bot for Discord",
+  "main": "assbot.js",
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "jshint": "^2.9.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node assbot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paladinshiva/assbot.git"
+  },
+  "keywords": [
+    "Discord",
+    "discord",
+    "bot",
+    "assignments",
+    "reactions"
+  ],
+  "author": "paladinshiva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paladinshiva/assbot/issues"
+  },
+  "homepage": "https://github.com/paladinshiva/assbot#readme"
+}
