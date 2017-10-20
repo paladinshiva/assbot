@@ -30,10 +30,12 @@ var client = new Discord.Client();
 //..EXEC FUNCTIONS..//
 //Login to the registered Discord server
 client.login(cfg.token);
+
 //Message on successfull launch
 client.on("ready", () => {
   console.log("I am ready!");
 });
+
 //Basic messages delete command
 client.on("message", (message) => {
   if (message.content.startsWith(cfg.prefix + "purge"))
