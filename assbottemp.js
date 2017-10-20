@@ -34,6 +34,7 @@ client.login(config.token);
 client.on("ready", () => {
   console.log("I am ready!");
 });
+
 client.on("message", message => {
 //Exiting if another bot messaged or prefix is incorrect
     if((message.author.bot) || (message.content.indexOf(config.prefix) !== 0)) return;
@@ -42,12 +43,16 @@ client.on("message", message => {
 //Attaching in-chat commands to the variable "command"
     var command = args.shift().toLowerCase();
     if (command === "purge"){
-        var amount = parseInt(args[0], 10);
-        var fetched = message.channel.fetchMessages({count: amount});
-        message.channel.bulkDelete(fetched);
-        // message.channel.bulkDelete(20);
+      com_purge(args);
     }
 });
+
+function com_purge(args) {
+  var amount = parseInt(args[0], 10);
+  var fetched = message.channel.fetchMessages({count: amount});
+  message.channel.bulkDelete(fetched);
+  // message.channel.bulkDelete(20);
+}
 
 //Basic messages delete command
 // client.on("message", (message) => {
