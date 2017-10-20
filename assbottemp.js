@@ -17,7 +17,7 @@
 
 //..IMPORTS..//
 //Config file import
-var cfg = require("./config");
+var config = require("./config");
 //Discord.js import
 var Discord = require("discord.js");
 //fs import
@@ -26,32 +26,34 @@ var fs = require("fs");
 //..ATTACHING OBJECTS..//
 //Attaching variable client to object Discord
 var client = new Discord.Client();
-//Attaching in-chat commands to the variable "command"
-// var command = args.shift().toLowerCase();
-//Defining arguments for in-chat commands
-// var args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 
 //..EXEC FUNCTIONS..//
 //Login to the registered Discord server
-client.login(cfg.token);
+client.login(config.token);
 //Message on successfull launch
 client.on("ready", () => {
   console.log("I am ready!");
 });
-//Exiting if another bot messaged
-// client.on("message", message => {
-//   if(message.author.bot) return;
-// });
-//Exiting if prefix incorrect
-// client.on("message", message => {
-//   if(message.content.indexOf(config.prefix) !== 0) return;
-// });
-//Basic messages delete command
-client.on("message", (message) => {
-  if (message.content.startsWith(cfg.prefix + "purge"))
-    message.channel.bulkDelete(20);
+client.on("message", message => {
+//Exiting if another bot messaged or prefix is incorrect
+    if((message.author.bot) || (message.content.indexOf(config.prefix) !== 0)) return;
+//Defining arguments for in-chat commands
+    var args = message.content.slice(config.prefix.length).trim().split(/ +/g);    
+//Attaching in-chat commands to the variable "command"
+    var command = args.shift().toLowerCase();
+    if (command === "purge"){
+        var amount = parseInt(args[0], 10);
+        var fetched = message.channel.fetchMessages({count: amount});
+        message.channel.bulkDelete(fetched);
+        // message.channel.bulkDelete(20);
+    }
 });
 
+//Basic messages delete command
+// client.on("message", (message) => {
+//         if (command === "purge")
+//           message.channel.bulkDelete(20);
+// });
 //..SAMPLE TEXT..//
 // const Discord = require("discord.js");
 // const client = new Discord.Client();
