@@ -38,19 +38,17 @@ client.on("message", message => {
 //Exiting if another bot messaged or prefix is incorrect
     if((message.author.bot) || (message.content.indexOf(config.prefix) !== 0)) return;
 //Defining arguments for in-chat commands
+  // New variable "arg", which is everything following the prefix.
     var args = message.content.slice(config.prefix.length).trim().split(/ +/g);    
 //Attaching in-chat commands to the variable "command"
     var command = args.shift().toLowerCase();
-    if (command === "purge"){
-        purge(args);
-    }
 });
 function purge(args) {
     var amount = parseInt(args[0], 10);
     var fetched = message.channel.fetchMessages({count: amount});
     message.channel.bulkDelete(fetched);
 }
-
+message.react("");
 //Basic messages delete command
 // client.on("message", (message) => {
 //         if (command === "purge")
@@ -227,5 +225,6 @@ function purge(args) {
 //       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
 //   }
 // });
-
+//3:00 PM] Dim: resolve the promise
+//[3:00 PM] Dim: react to the resolved message
 // client.login(config.token);

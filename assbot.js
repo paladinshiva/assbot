@@ -1,3 +1,5 @@
+// import { User, ClientUser, GuildMember, Client } from 'discord.js';
+
 /*jshint esversion: 6 */
 //...TOC...//
 //..IMPORTS..//
@@ -6,38 +8,52 @@
 //fs import
 //..ATTACHING OBJECTS..//
 //Attaching variable client to object Discord
-//Attaching in-chat commands to the variable "command"
-//Defining arguments for in-chat commands
 //..EXEC FUNCTIONS..//
 //Login to the registered Discord server
 //Message on successfull launch
-//Basic messages delete command
 //..SAMPLE TEXT..//
 // -------
 
-//..IMPORTS..//
-//Config file import
-var cfg = require("./config");
-//Discord.js import
-var Discord = require("discord.js");
-//fs import
-var fs = require("fs");
-
-//..ATTACHING OBJECTS..//
-//Attaching variable client to object Discord
+//..REQUIRED CODE..//
+//Making Discord.js module available
+var Discord = require('discord.js');
+//Declaring use of Config.json file
+var config = require('./config.json');
+//Attaching variable client to object Discord.
 var client = new Discord.Client();
 
 //..EXEC FUNCTIONS..//
-//Login to the registered Discord server
-client.login(cfg.token);
+//Login to the registered Discord server.
+client.login(config.token);
 
-//Message on successfull launch
-client.on("ready", () => {
+//Message on successfull launch.
+client.on('ready',function() {
   console.log("I am ready!");
 });
 
-//Basic messages delete command
-client.on("message", (message) => {
-  if (message.content.startsWith(cfg.prefix + "purge"))
-    message.channel.bulkDelete(20);
+//Define chat command prefix
+//Attach emitter to the message
+client.on('message',  function(message) {
+  //If chat message prefix doesn't equal prefix value in config, retun.
+  if (message.content.indexOf(config.prefix) !== 0) return;
+  // New variable "arg", which is everything following the prefix.
+  var arg = message.content.slice(config.prefix.length).trim().toLowerCase().split(/ +/g);
+  if (arg[1] === "welcome"){
+    message.channel.send({embed: {
+      title: "Platform Assignment",
+      image : {
+        "url": "http://96.2.136.233/img/hi.jpg"
+      }
+    }
+    });
+    message.react("😱");
+    message.react("🤔");
+    message.react("🙄");
+  }
 });
+client.on('messageReactionAdd', function(member){
+  if (!member.bot){
+    member.addRole();
+  }
+
+}); 
